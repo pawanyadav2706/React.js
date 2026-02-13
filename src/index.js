@@ -22,11 +22,36 @@ import './index.css';
 // ReactDOM.createRoot(document.getElementById('root')).render(element);
 
 
-// create element using jsx without using react
+// create element using jsx 
 
-const element = React.createElement('div',{className: 'color'},
-  React.createElement('h1', null, 'Welcome to my React app and my first React Project'),
-  React.createElement('h2', null, 'Learning react app..')
-);
-ReactDOM.createRoot(document.getElementById('root')).render(element);
+// const element = React.createElement('div',{className: 'color'},
+//   React.createElement('h1', null, 'Welcome to my React app and my first React Project'),
+//   React.createElement('h2', null, 'Learning react app..')
+// );
+// ReactDOM.createRoot(document.getElementById('root')).render(element);
 
+
+
+var DisplayEmployeeInfo = (Employee) => {
+  const DepartMent = (Deptinfo) => {
+    return (
+      <div>
+        <h2>Department</h2>
+        <p>Department: {Deptinfo.dept}</p>
+        <p>Head of Department: {Deptinfo.head}</p>
+      </div>
+    )
+  };
+
+  return (
+    <div>
+      <h1>employee</h1>
+      <p>employeeid: {Employee.id}</p>
+      <p>employeename: {Employee.name}</p>
+      <p>employeeage: {Employee.age}</p>
+      <DepartMent dept={Employee.dept} head={Employee.head} />
+    </div>
+  )
+};
+const Element = DisplayEmployeeInfo({ id: 1, name: 'John Doe', age: 30, dept: 'Engineering', head: 'Jane Smith' });
+ReactDOM.createRoot(document.getElementById('root')).render(Element);
