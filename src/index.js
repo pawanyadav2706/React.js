@@ -1,7 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-
 
 // const element = <h1 className='color'>Welcome to my React app and my first React Project</h1>;
 // ReactDOM.createRoot(document.getElementById('root')).render(element);
@@ -30,28 +26,43 @@ import './index.css';
 // );
 // ReactDOM.createRoot(document.getElementById('root')).render(element);
 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
 
-var DisplayEmployeeInfo = (Employee) => {
-  const DepartMent = (Deptinfo) => {
-    return (
+// how to create a react class component 
+class Employee extends React.Component{
+  constructor(props){
+    console.log(props);
+    super(props);
+  }
+  render(){
+    return(
       <div>
-        <h2>Department</h2>
-        <p>Department: {Deptinfo.dept}</p>
-        <p>Head of Department: {Deptinfo.head}</p>
+        <h1>Employee Information...</h1>
+        <p><label>Employee id:<b>{this.props.id}</b></label></p>
+        <p><label>Employee name:<b>{this.props.name}</b></label></p>
+        <p><label>Employee department:<b>{this.props.department}</b></label></p>
+        <p><label>Employee salary:<b>{this.props.salary}</b></label></p>
+        <Department id={this.props.departmentId} name={this.props.department} head={this.props.departmentHead} />
       </div>
     )
-  };
+  }
+}
+class Department extends React.Component{
+    render(){
+      return(
+        <div>
+          <h1>Department Information</h1>
+          <p><label>Department id:<b>{this.props.id}</b></label></p>
+          <p><label>Department name:<b>{this.props.name}</b></label></p>
+          <p><label>Department head:<b>{this.props.head}</b></label></p>
+        </div>
+      )
+    }
+  }
 
-  return (
-    <div>
-      <h1>employee</h1>
-      <p>employeeid: {Employee.id}</p>
-      <p>employeename: {Employee.name}</p>
-      <p>employeeage: {Employee.age}</p>
-      <DepartMent dept={Employee.dept} head={Employee.head} />
-    </div>
-  )
-};
-const Element = DisplayEmployeeInfo({ id: 1, name: 'John Doe', age: 30, dept: 'Engineering', head: 'Jane Smith' });
-ReactDOM.createRoot(document.getElementById('root')).render(Element);
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Employee id='101' name='John Doe' department='Information Technology' salary='rs.5000' departmentId='1001' departmentHead='John Smith'/>
+);
