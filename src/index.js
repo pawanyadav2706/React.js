@@ -29,40 +29,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-
-// how to create a react class component 
-class Employee extends React.Component{
+// 2nd example of state in react
+class CountCharacter extends React.Component {
   constructor(props){
-    console.log(props);
     super(props);
+    this.state={
+      message:'',
+      
+    };
   }
+  onChangemessage = (event) => {
+    this.setState({message:event.target.value});
+  }
+  
+
   render(){
     return(
       <div>
-        <h1>Employee Information...</h1>
-        <p><label>Employee id:<b>{this.props.id}</b></label></p>
-        <p><label>Employee name:<b>{this.props.name}</b></label></p>
-        <p><label>Employee department:<b>{this.props.department}</b></label></p>
-        <p><label>Employee salary:<b>{this.props.salary}</b></label></p>
-        <Department id={this.props.departmentId} name={this.props.department} head={this.props.departmentHead} />
+        <h1>Count the number of characters in the input field...</h1>
+        <input type='text' placeholder='Enter a message' onChange={this.onChangemessage}/>
+        <h2>Total characters: {this.state.message.length}</h2>
       </div>
     )
   }
 }
-class Department extends React.Component{
-    render(){
-      return(
-        <div>
-          <h1>Department Information</h1>
-          <p><label>Department id:<b>{this.props.id}</b></label></p>
-          <p><label>Department name:<b>{this.props.name}</b></label></p>
-          <p><label>Department head:<b>{this.props.head}</b></label></p>
-        </div>
-      )
-    }
+// 1st example of state in react
+class Employee extends React.Component {
+state={counter:0};
+addEmployee=()=>{
+  this.setState({counter:this.state.counter+1});
+}
+  render(){
+    return(
+      <div>
+        <h1>Welcome to my first React App...</h1>
+        <button onClick={this.addEmployee}>Click me</button>
+        <h2>Total Employees: {this.state.counter}</h2>
+      </div>
+    )
   }
+}
+const element = <CountCharacter/>;
+ReactDOM.createRoot(document.getElementById('root')).render(element);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Employee id='101' name='John Doe' department='Information Technology' salary='rs.5000' departmentId='1001' departmentHead='John Smith'/>
-);
